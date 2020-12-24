@@ -18,7 +18,6 @@ export const Logo = styled.Image`
 export const Title = styled.Text`
   font-size: 18px;
   color: #fff;
-  font-weight: bold;
   margin: 8px 0;
   font-family: Poppins-Regular;
   letter-spacing: 1px;

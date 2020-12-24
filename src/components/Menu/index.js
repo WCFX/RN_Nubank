@@ -11,8 +11,15 @@ import {
   SignOutButtonText,
 } from './styles';
 
-export default () => (
-  <Container>
+export default ({ translateY }) => (
+  <Container
+    style={{
+      opacity: translateY.interpolate({
+        inputRange: [0, 400],
+        outputRange: [0, 1],
+      }),
+    }}
+  >
     <Code>
       <QRCode
         value="https://nubank.com.br"

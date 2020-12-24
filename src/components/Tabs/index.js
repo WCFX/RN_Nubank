@@ -5,8 +5,25 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { Container, TabsContainer, TabItem, TabText } from './styles';
 
-export default () => (
-  <Container>
+export default ({ translateY }) => (
+  <Container
+    style={{
+      transform: [
+        {
+          translateY: translateY.interpolate({
+            inputRange: [0, 380],
+            outputRange: [0, 90],
+            extrapolate: 'clamp',
+          }),
+        },
+      ],
+      opacity: translateY.interpolate({
+        inputRange: [0, 400],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+      }),
+    }}
+  >
     <TabsContainer>
       <TabItem>
         <IconCummunity name="clover" size={24} color="#FFF" />

@@ -26,7 +26,16 @@ const Home = () => {
 
   const translateY = new Animated.Value(0);
 
-  const animatedEvent = Animated.event([]);
+  const animatedEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationY: translateY,
+        },
+      },
+    ],
+    { useNativeDriver: true }
+  );
 
   function onHandlerStateChange(event) {}
 
@@ -35,12 +44,24 @@ const Home = () => {
       <Header />
 
       <Content>
-        <Menu />
+        <Menu translateY={translateY} />
         <PanGestureHandler
           onGestureEvent={animatedEvent}
           onHandlerStateChange={onHandlerStateChange}
         >
-          <Card>
+          <Card
+            style={{
+              transform: [
+                {
+                  translateY: translateY.interpolate({
+                    inputRange: [0, 420],
+                    outputRange: [0, 420],
+                    extrapolate: 'clamp',
+                  }),
+                },
+              ],
+            }}
+          >
             <CardHeader>
               <Icon name="attach-money" size={28} color="#666" />
               <Icon name="visibility-off" size={28} color="#666" />
@@ -59,7 +80,7 @@ const Home = () => {
       </Content>
 
       <PositionTabs>
-        <Tabs />
+        <Tabs translateY={translateY} />
       </PositionTabs>
     </Container>
   );

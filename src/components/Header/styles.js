@@ -5,9 +5,9 @@ export const Container = styled.View`
   padding: 40px 0 30px;
 `;
 export const Top = styled.View`
-  /* flex-direction: row; */
   align-items: center;
   margin-bottom: 10px;
+  margin-top: -100px;
 `;
 
 export const Logo = styled.Image`

@@ -23,6 +23,7 @@ import Menu from '../../components/Menu';
 
 const Home = () => {
   const [totalValue, setTotalValue] = useState('1.840.540,87');
+  let offset = 0;
 
   const translateY = new Animated.Value(0);
 
@@ -37,7 +38,32 @@ const Home = () => {
     { useNativeDriver: true }
   );
 
-  function onHandlerStateChange(event) {}
+  function onHandlerStateChange(event) {
+    let opened = false;
+
+    if (event.nativeEvent.oldState === State.ACTIVE) {
+      const { translationY } = event.nativeEvent;
+
+      offset += translationY;
+
+      if (translationY >= 100) {
+        opened = true;
+      } else {
+        translateY.setValue(offset);
+        translateY.setOffset(0);
+        offset = 0;
+      }
+      Animated.timing(translateY, {
+        toValue: opened ? 400 : 0,
+        duration: 400,
+        useNativeDriver: true,
+      }).start(() => {
+        offset = opened ? 400 : 0;
+        translateY.setOffset(offset);
+        translateY.setValue(0);
+      });
+    }
+  }
 
   return (
     <Container>
